@@ -12,5 +12,24 @@
 
 
 <ion-content padding>
-
+  <ion-card class="card-sorteio">
+    <ion-row class="ln-sorteio">
+      <ion-col col-8 class="dv-sorteio">
+        <span class="texto-sorteio">{{sorteado}}</span>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button color="primary" class="btn-sorteio" (click)="sorteia()">
+          Sortear
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card class="card-ultimos">
+    <div class="ultimos">
+      <ion-badge item-end class="number-sorteado" *ngFor="let ultimo of ultimos">{{ultimo}}</ion-badge>
+    </div>
+  </ion-card>
+  <ion-card class="card-soretados">
+    <ion-badge item-end class="number-sorteado" *ngFor="let um of todos">{{um}}</ion-badge>
+  </ion-card>
 </ion-content>

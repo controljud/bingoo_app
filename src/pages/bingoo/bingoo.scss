@@ -1,3 +1,38 @@
 page-bingoo {
+  .card-sorteio{
+    height: 30%;
+  }
+  .ln-sorteio{
+    height: 100%;
+  }
+  .dv-sorteio{
+    height: 100%;
+    font-size: 80px;
+  }
+  .texto-sorteio{
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  .btn-sorteio{
+    height: 100%;
+    width: 100%;
+  }
 
+  .card-ultimos{
+    height: 10%;
+  }
+  .number-sorteado{
+    width: 31px;
+    margin: 3px;
+    margin-top: 13px;
+  }
+  .ultimos{
+    padding: 5px;
+  }
+
+  .card-soretados{
+    height: 50%;
+  }
 }
