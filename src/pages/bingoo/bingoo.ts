@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the BingooPage page.
@@ -14,23 +14,60 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'bingoo.html',
 })
 export class BingooPage {
-
   public sorteado: any;
+  public sorteados: any;
   public ultimos: any;
   public todos: any;
+  public game: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.ultimos = [];
-    this.todos = [];
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+  ) {
+    this.iniciaTudo();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BingooPage');
+
+  }
+
+  iniciaTudo(){
+    this.sorteado = null;
+    this.sorteados = [];
+    this.ultimos = [];
+    this.todos = [];
+    this.game = true;
+
+    this.iniciaTodos();
   }
 
   sorteia(){
-    this.sorteado = Math.floor(Math.random()*90)+1;
-    this.insereUltimo();
+    if(this.game){
+      let round = true;
+      while(round){
+        let sort = Math.floor(Math.random()*90)+1;
+        if(this.sorteados.indexOf(sort) == -1 && this.sorteados.length <= 90){
+          this.sorteado = sort;
+          this.sorteados.push(sort);
+
+          this.insereUltimo();
+          this.insereTodos();
+
+          round = false;
+        }
+        if(this.sorteados.length == 90){
+          this.game = false;
+        }
+      }
+    }else{
+      let alert = this.alertCtrl.create({
+        title: 'Alerta',
+        subTitle: 'Não há mais números a serem sorteados',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
   }
 
   insereUltimo(){
@@ -41,9 +78,27 @@ export class BingooPage {
   }
 
   iniciaTodos(){
+    let linha = [];
+    let x = 1;
     for(let i = 0; i < 90; i++){
-      this.todos.push(0);
+      linha.push({'nu': i + 1, 'cl': 'cor-vazio'});
+
+      if(x == 10){
+        this.todos.push(linha);
+        linha = [];
+        x = 0;
+      }
+      x++;
     }
   }
 
+  insereTodos(){
+    let num = this.sorteado - 1;
+
+    if(num > 9){
+      this.todos[num.toString().slice(0, 1)][num.toString().slice(1)].cl = 'cor-cheio';
+    }else{
+      this.todos[0][num].cl = 'cor-cheio';
+    }
+  }
 }

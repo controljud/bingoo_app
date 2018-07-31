@@ -5,21 +5,23 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>Bingoo</ion-title>
+  <ion-navbar hideBackButton>
+    <ion-title>Bingoo!</ion-title>
   </ion-navbar>
 </ion-header>
 
-
-<ion-content padding>
+<ion-content padding class="dv-principal">
   <ion-card class="card-sorteio">
     <ion-row class="ln-sorteio">
       <ion-col col-8 class="dv-sorteio">
         <span class="texto-sorteio">{{sorteado}}</span>
       </ion-col>
-      <ion-col col-4>
-        <button ion-button color="primary" class="btn-sorteio" (click)="sorteia()">
+      <ion-col col-4 class="dv-button">
+        <button ion-button class="btn-sorteio" (click)="sorteia()">
           Sortear
+        </button>
+        <button ion-button color="secondary" class="btn-novo" (click)="iniciaTudo()">
+          Novo
         </button>
       </ion-col>
     </ion-row>
@@ -30,6 +32,13 @@
     </div>
   </ion-card>
   <ion-card class="card-soretados">
-    <ion-badge item-end class="number-sorteado" *ngFor="let um of todos">{{um}}</ion-badge>
+    <div class="dv-sorteados">
+      <div *ngFor="let linha of todos" class="dv-linha">
+        <div *ngFor="let um of linha" class="dv-casa {{um.cl}}">
+          {{um.nu}}
+        </div>
+        <br/>
+      </div>
+    </div>
   </ion-card>
 </ion-content>
